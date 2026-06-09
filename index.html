@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101417" />
+    <title>Unseen Sport</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigation principale">
+        <div class="brand">
+          <span class="brand-mark">US</span>
+          <div>
+            <strong>Unseen Sport</strong>
+            <span>carnet de muscu</span>
+          </div>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Sections">
+          <button class="nav-button is-active" data-view="dashboard" type="button">Tableau de bord</button>
+          <button class="nav-button" data-view="templates" type="button">Seances</button>
+          <button class="nav-button" data-view="history" type="button">Historique</button>
+          <button class="nav-button" data-view="stats" type="button">Stats</button>
+        </nav>
+
+        <button id="resetDemo" class="ghost-button" type="button">Recharger les donnees de base</button>
+      </aside>
+
+      <main>
+        <section id="dashboard" class="view is-visible" aria-labelledby="dashboardTitle">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Aujourd'hui</p>
+              <h1 id="dashboardTitle">Planifie, note, progresse.</h1>
+            </div>
+            <button id="quickSession" class="primary-button" type="button">Nouvelle seance</button>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span>Volume total</span>
+              <strong id="metricVolume">0 kg</strong>
+            </article>
+            <article class="metric-card">
+              <span>Repetitions</span>
+              <strong id="metricReps">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Seances terminees</span>
+              <strong id="metricSessions">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Meilleur mouvement</span>
+              <strong id="metricBest">-</strong>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Seance en cours</h2>
+                <button id="finishSession" class="success-button" type="button">Terminer</button>
+              </div>
+              <div id="activeWorkout"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Prochaine bonne idee</h2>
+              </div>
+              <div id="nextSuggestion" class="suggestion"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="templates" class="view" aria-labelledby="templatesTitle">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Bibliotheque</p>
+              <h1 id="templatesTitle">Seances pretes et personnalisables.</h1>
+            </div>
+            <button id="openTemplateForm" class="primary-button" type="button">Creer une seance</button>
+          </div>
+
+          <form id="templateForm" class="builder is-hidden">
+            <div class="form-row">
+              <label>
+                Nom
+                <input id="templateName" name="name" maxlength="36" placeholder="Ex: Haut du corps maison" required />
+              </label>
+              <label>
+                Objectif
+                <select id="templateGoal" name="goal">
+                  <option>Force</option>
+                  <option>Hypertrophie</option>
+                  <option>Endurance</option>
+                  <option>Reprise</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Exercices, un par ligne
+              <textarea id="templateExercises" rows="5" placeholder="Squat goblet&#10;Developpe couche&#10;Rowing haltere" required></textarea>
+            </label>
+            <div class="actions">
+              <button class="secondary-button" id="cancelTemplate" type="button">Annuler</button>
+              <button class="primary-button" type="submit">Enregistrer</button>
+            </div>
+          </form>
+
+          <div id="templateList" class="template-list"></div>
+        </section>
+
+        <section id="history" class="view" aria-labelledby="historyTitle">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Carnet</p>
+              <h1 id="historyTitle">Historique des seances.</h1>
+            </div>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </section>
+
+        <section id="stats" class="view" aria-labelledby="statsTitle">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Progression</p>
+              <h1 id="statsTitle">Ce qui monte vraiment.</h1>
+            </div>
+          </div>
+          <div class="content-grid">
+            <section class="panel">
+              <h2>Volume par seance</h2>
+              <div id="volumeChart" class="bar-chart"></div>
+            </section>
+            <section class="panel">
+              <h2>Records par exercice</h2>
+              <div id="recordList" class="record-list"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="exerciseTemplate">
+      <article class="exercise-card">
+        <div class="exercise-title">
+          <strong></strong>
+          <button class="icon-button remove-exercise" type="button" aria-label="Supprimer l'exercice">x</button>
+        </div>
+        <div class="set-grid"></div>
+        <button class="mini-button add-set" type="button">Ajouter une serie</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
